@@ -1,0 +1,714 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;  /*fonte do nome completo*/
+  background-color: #f8fafc;
+  color: #1e293b;
+  line-height: 1.6;
+}
+
+.dashboard {
+  min-height: 100vh;
+  display: flex; /*largura onde fica a tabela e o grafico na tela*/
+  flex-direction: column;
+}
+
+/* Header Corporativo */
+.header {
+  background: linear-gradient(135deg, #079b13 0%, #1e8a4b 100%);
+  color: white;
+  padding: 0rem 0;   /*Controlar a altura do cabeçalho verde*/
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.header-content {
+  max-width: 1200px;
+  flex: relative;
+  margin: 0 auto;
+  padding: 0 0rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 95px; /* ajuste para o tamanho que quiser, do header verde*/
+}
+
+.logo-section {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin-right: 2rem;
+}
+
+.logo-placeholder {
+  max-width: 50px;
+  max-height: 50px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+/*Ajustar a lateral esquerda*/
+.header-stats {
+  display: flex;
+  justify-content: flex-end;
+}
+
+/*Alterar o tamanho da logo */
+.logo-img { 
+  width: 12%;
+  height: 12%;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.company-info h1 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+
+.department {
+  font-size: 0.875rem;
+  opacity: 0.9;
+  font-weight: 400;
+}
+
+.header-stats {
+  display: flex;
+  gap: 2rem;
+}
+
+.stat-item {
+  text-align: right;
+  flex: absolute;
+  margin-right: -30px;   /*Total  de rca para direita*/
+}
+
+.stat-label {
+  display: block;
+  font-size: 0.75rem;
+  opacity: 0.8;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.15rem;
+}
+
+.stat-value {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.stat-value.positive {
+  color: #10b981;
+}
+
+/* Controles */
+.controls-section {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.controls-left {
+  display: flex;
+  gap: 1rem;
+}
+
+.filter-select {
+  padding: 0.5rem 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  background: white;
+  font-size: 0.875rem;
+  color: #374151;
+  cursor: pointer;
+}
+
+.filter-select:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+
+.btn-primary, .btn-secondary {  /*Atualizar Dados*/
+  padding: 16px 16px;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: none;
+  background: #3b82f6;
+  color: white;
+}
+
+
+.btn-secondary {
+  background: white;
+  color: #374151;
+  border: 1px solid #d1d5db;
+}
+
+.btn-secondary:hover {
+  background: #f9fafb;
+}
+
+/* Seção da Tabela */
+.table-section {
+  max-width: 1200px; /*dimensão da tabela/gráfico*/
+  margin: 0 auto 3rem;
+  padding: 0 2rem;
+  flex: 2;
+}
+
+.table-section,
+.table-grafico-container {
+  margin-bottom: 2px; /* cria espaço entre tabela/gráfico e rodapé */
+}
+
+.table-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: -0.80rem; /*espaço entre os botões e o cabeçalho da tabela*/
+}
+
+.table-header h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.update-time {
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.data-table th {
+  padding: 0.3rem;
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: #4c5137;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  height: 80px;  /*Largura da linha do cabeçalho laranja*/
+}
+
+.data-table tbody tr {
+  border-bottom: 1px solid #f3f4f6;
+  transition: background-color 0.2s;
+}
+
+.data-table tbody tr:hover {
+  background: #f8fafc;
+}
+
+.data-table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.data-table td {
+  padding: 0.3rem;   /*Largura da linha*/
+  vertical-align: middle;
+}
+
+/* Indicadores de Posição */
+.position-indicator {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px; /*largura do número da posição*/
+  height: 22px; /*altura da bola da posição*/
+  border-radius: 100px;
+  font-weight: 600;
+  font-size: 0.85rem; /*tamanho da fonte do número da posição*/
+  background: #eceef1;
+  color: #374151;
+}
+/*Top 5*/
+.position-indicator.first {
+  background: #f8bf02;  /*Quadrado da posição 1*/
+  color: #0c0c0c;       /*Fonte da posição 1*/
+}
+
+.position-indicator.second {
+  background: #f8bf02; /*Quadrado da posição 2*/
+  color: #374151;      /*Fonte da posição 2*/
+}
+
+.position-indicator.third {
+  background: #f8bf02;   /*Quadrado da posição 3*/
+  color: #374151;        /*Fonte da posição 3*/
+}
+
+.position-indicator.room {
+  background: #f8bf02;   /*Quadrado da posição 4*/
+  color: #374151;        /*Fonte da posição 4*/
+}
+
+.position-indicator.fifth {
+  background: #f8bf02;   /*Quadrado da posição 5*/
+  color: #374151;        /*Fonte da posição 5*/
+}
+
+
+/* Colunas */
+.col-position {
+  width: 80px;
+  height: 10px;
+}
+
+
+.col-name {
+  min-width: 250px;  /* aumenta espaço mínimo, campo NOME COMPLETO*/
+  white-space: nowrap; /* evita quebrar o nome */
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.col-balance {
+  width: 150px;
+  text-align: left; /*saldo para esquerda*/
+}
+
+.col-status {
+  width: 120px;
+}
+
+.rca {
+  font-family: 'Courier New', monospace;
+  font-weight: 800;
+  color: #1f2937;
+  background: #f3f4f6;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 1rem; /*tamanho da fonte codigo*/
+}
+
+.name-info {
+  display: flex;
+  justify-content: space-between; /* distribui o nome e o saldo na mesma linha */
+  align-items: center;
+  gap: 1rem; /* espaço entre nome e saldo */
+}
+
+.full-name {
+  font-weight: 500;
+  color: #1f2937;
+  margin-bottom: 0.125rem; /*largura da linha da tabela*/
+
+}
+
+.role {
+  font-size: 0.75rem;
+  color: #6b7280;
+}
+
+.balance {
+  font-weight: 600;
+  font-size: 1rem;
+  text-align: left; /*saldo atual para esquerda*/
+}
+
+.balance.positive {
+  color: #059669;
+}
+
+.balance.negative {
+  color: #dc2626;
+}
+
+.status-badge.status-up {
+  background: #dbeafe; /* azul claro */
+  color: #1d4ed8;      /* azul escuro */
+}
+
+/* Status "Desceu" - fundo vermelho claro, texto vermelho escuro */
+.status-badge.status-down {
+  background: #fee2e2; /* vermelho claro */
+  color: #b91c1c;      /* vermelho escuro */
+}
+
+/* Status "Permaneceu" - fundo cinza claro, texto cinza escuro */
+.status-badge.status-same {
+  background: #e5e7eb; /* cinza claro */
+  color: #374151;      /* cinza escuro */
+}
+
+.status-content {
+  background: #e5e7eb; /* cinza claro */
+  color: #374151;      /* cinza escuro */
+  display: flex;
+  align-items: center;
+  gap: 4px; /* espaço entre ícone e texto */
+}
+
+/* Status desconhecido ou inválido - fundo neutro, texto preto */
+.status-badge.status-unknown {
+  background: #f3f4f6; /* cinza bem claro */
+  color: #111827;      /* preto quase */
+}
+
+/* Footer */
+.footer {
+  background: #1f2937;
+  color: #d1d5db;
+  margin-top: auto;
+}
+
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem 2rem;
+  display: flex;
+  flex-direction: row; /* agora os itens ficam em linha */
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.875rem; /*texto do rodapé*/
+  text-align: center;
+  gap: 0; /* tira espaço extra */
+  height: 50px; /* opcional */
+}
+
+
+/* Responsividade */
+@media (max-width: 1024px) {
+  .header-content {
+    flex-direction: column;
+    gap: 1.5rem;
+    text-align: center;
+  }
+  
+  .header-stats {
+    justify-content: center;
+  }
+  
+  .controls-section {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: stretch;
+  }
+  
+  .controls-left,
+  .controls-right {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboard {
+    padding: 0;
+  }
+  
+  .header {
+    padding: 1.5rem 0;
+  }
+  
+  .table-section,
+  .controls-section {
+    padding: 0 1rem;
+  }
+  
+  .data-table {
+    min-width: 700px;
+  }
+  
+  .data-table th,
+  .data-table td {
+    padding: 0.75rem 0.5rem;
+  }
+  
+}
+
+@media (max-width: 480px) {
+  .header-content {
+    padding: 0 1rem;
+  }
+  
+  .company-info h1 {
+    font-size: 1.5rem;
+  }
+  
+  .stat-value {
+    font-size: 1.25rem;
+  }
+  
+  .controls-left {
+    flex-direction: column;
+  }
+  
+  .controls-right {
+    flex-direction: column;
+  }
+}
+
+@media print {
+  body {
+    background: white !important;
+    color: black !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  header,
+  nav,
+  .controls-section,
+  .btn-primary,
+  .btn-secondary,
+  .footer {
+    display: none !important; /* Oculta elementos que não precisam aparecer no PDF */
+  }
+
+.position-indicator {
+  padding: 6px 8px;
+  border-radius: 6px;
+  font-weight: bold;
+  width: 28px;
+  text-align: center;
+}
+
+  .balance.positive {
+    color: #059669 !important;
+  }
+
+  .balance.negative {
+    color: #dc2626 !important;
+  }
+
+  .status-badge.active {
+    background-color: #d1fae5 !important;
+    color: #065f46 !important;
+  }
+
+  .status-badge.attention {
+    background-color: #fef3c7 !important;
+    color: #92400e !important;
+  }
+
+}
+/* ===========================================
+   NOVOS AJUSTES PARA CABEÇALHO DA TABELA FIXA
+   =========================================== */
+.table-container {
+  background: #f8f8f7;   /* fundo da área da tabela */
+  border-radius: 12px;
+  max-height: 70vh;      /* altura máxima da tabela */
+  overflow-y: auto;      /* cria a rolagem vertical */
+  overflow-x: auto;      /* cria a rolagem horizontal se necessário */
+  flex: 1.05;
+  border: 1px solid #f8f4f4; /*cor do contorno da tabela*/
+}
+
+.table-container table {
+  border-collapse: collapse; /* elimina os espaços entre células */
+  width: 99%;     /* garante que a tabela ocupe toda a largura */
+}
+
+/* cabeçalho fixo */
+.table-container table thead th {
+  position: sticky;
+  top: 0;
+  background-color: rgb(247, 184, 67); /* cor de fundo do cabeçalho */
+  color: rgb(20, 20, 20);             /* cor da fonte */
+  font-weight: bold;
+  text-align: center;
+  z-index: 2;               /* garante que fique acima das linhas */
+  padding: 2.5px;              /* altura do cabeçalho */
+  flex: 200;
+}
+
+.table-container table tbody td {
+  font-size: 12px;
+}
+
+
+/* Evita bug de sticky em algumas engines */
+.data-table {
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+/*Grafico de*/
+.table-grafico-container {
+  display: flex;
+  gap: 30px;        /* Espaço entre tabela e gráfico */
+  align-items: flex-start;
+}
+
+.grafico-container {
+  flex: 1;             /* gráfico ocupa espaço proporcional */
+  min-width: 500px;    /* aumenta a largura mínima */
+  padding: 1rem;       /* dá respiro interno */
+}
+
+.grafico-container canvas {  /*gráfico de linhas*/
+  width: 120% !important;   /* ocupa todo o espaço do container / largura */
+  height: 200px !important; /* altura fixa estável */
+}
+
+/* cabeçalho do gráfico (select + nome) */
+.grafico-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+/* deixa o nome ao lado do select, com destaque discreto */
+.rca-nome {
+  font-weight: 600;
+  color: #334155;
+  white-space: nowrap;
+}
+
+/* MESMO ESTILO para os dois selects (topo e gráfico) */
+#filter-rca,
+#filter-grafico-rca {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: #ffffff;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  padding: 8px 36px 8px 12px;
+  font-size: 14px;
+  line-height: 1.25;
+  cursor: pointer;
+  min-width: 180px;
+}
+
+/* setinha do select (chevron) */
+#filter-rca,
+#filter-grafico-rca {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+}
+
+
+/* Mantém a responsividade */
+@media (max-width: 1024px) {
+  .table-grafico-container {
+    flex-direction: column;
+  }
+
+  .grafico-container {
+    width: 100%;
+    height: 300px;
+  }
+}
+
+#export-pdf {
+  background-color: #D32F2F; /* vermelho escuro */
+  color: white;
+  border: none;
+  padding: 16px 16px; /*dimensão do botção*/
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-left: 12px; /* ajusta o valor conforme desejar */
+}
+
+/* === Estilo para impressão (Exportar PDF) === */
+@media print {
+  body {
+    background: white !important;
+    color: black !important;
+    margin: 0;
+    font-size: 12pt;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  header,
+  nav,
+  .controls-section,
+  .btn-primary,
+  .btn-secondary,
+  .footer {
+    display: none !important;
+  }
+
+  .table-section {
+    margin: 0 !important;
+    box-shadow: none !important;
+  }
+
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .data-table th,
+  .data-table td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: left;
+  }
+
+  /* Cores dos saldos */
+  .balance.positive,
+  .positive {
+    color: #059669 !important; /* verde escuro */
+    font-weight: bold !important;
+  }
+
+  .balance.negative,
+  .negative {
+    color: #dc2626 !important; /* vermelho */
+    font-weight: bold !important;
+  }
+
+  /* Cores status */
+  .status-badge.active,
+  .active {
+    background-color: #d1fae5 !important;
+    color: #065f46 !important;
+    font-weight: bold !important;
+  }
+
+  .status-badge.attention,
+  .attention {
+    background-color: #fef3c7 !important;
+    color: #92400e !important;
+    font-weight: bold !important;
+  }
+
+}
+
+#ranking-title {  /*Classificação*/
+  transform: translateX(-0px); /* ajusar para a esquerda */
+  font-size: 30px;
+}
+
+.controls-right {
+  display: flex;
+  align-items: center; /* alinha verticalmente ao centro */
+  gap: 15px; /* espaço entre os botões exportar pdf e atualizar dados*/
+}
+
+.update-time {  /*Última atualização*/
+  display: inline-block;/* opcional: ajustar a posição vertical */
+  transform: translateY(2px) translateX(60px); /* ajustando para a direita */
+  font-size: 14px; /* ajusta tamanho se necessário */
+  color: #555; /* opcional: cor do texto */
+}

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ranking de Conta Corrente - Dashboard Corporativo</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="dashboard">
+    <!-- Header -->
+    <header class="header">
+      <div class="header-content">
+        <div class="logo-section">
+          <img src="./assets/logo.png" alt="Logo da Empresa" class="logo-img" />
+          <div class="company-info">
+            <h1>Ranking de Conta Corrente</h1>
+            <p class="department">Departamento Comercial</p>
+          </div>
+        </div>
+        <div class="header-stats">
+          <div class="stat-item">
+            <span class="stat-label">Total de RCA's</span>
+            <span class="stat-value" id="total-contas">--</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Controles -->
+    <div class="controls-section">
+      <div class="controls-left">
+       <h2 id="ranking-title">Classificação:</h2>
+        <select id="filter-rca" class="filter-select">
+          <option value="all">Todos os RCA's</option>
+          <option value="1-5">RCA 001-005</option>
+          <option value="1-10">RCA 001-010</option>
+          <option value="1-20">RCA 001-020</option>
+        </select>
+        <select id="sort-by" class="filter-select">
+          <option value="saldo">Ordenar por Saldo</option>
+          <option value="nome">Ordenar por Nome</option>
+          <option value="rca">Ordenar por RCA</option>
+        </select>
+      </div>
+      <div class="controls-right">
+        <button id="export-pdf" class="btn btn-outline">Exportar PDF</button>
+        <button id="refresh-button" class="btn-primary">Atualizar Dados</button>
+        <span class="update-time">Última atualização: <span id="last-update"></span></span>
+      </div>
+    </div>
+
+    <!-- Tabela + Gráfico -->
+    <div class="table-section">
+      <div class="table-header">
+        <!--<h2 id="ranking-title">Classificação por Saldo</h2>-->
+        <!--<span class="update-time">Última atualização:<span id="last-update"></span></span>-->
+      </div>
+
+      
+      <div class="table-grafico-container">
+  <!-- 🔹 Tabela -->
+  <div class="table-container">
+    <table id="ranking-table">
+      <thead>
+        <tr>
+          <th>POSIÇÃO</th>
+          <th>RCA</th>
+          <th>NOME COMPLETO</th>
+          <th>SALDO ATUAL</th>
+          <th>STATUS</th>
+        </tr>
+      </thead>
+      <tbody id="ranking-body"></tbody>
+    </table>
+  </div>
+
+
+  <!-- 🔹 Gráficos -->
+  <div class="grafico-container">
+    <!-- Gráfico do dia-->
+    <div class="grafico-header">
+  <h3>Gráfico de Alterações de Saldo (Dia)</h3>
+  <select id="filter-grafico-rca">
+    <option value="">Selecione RCA</option>
+  </select>
+</div>
+<span id="nome-rca-selecionado" class="rca-nome"></span>
+<canvas id="graficoLinha"></canvas>
+
+<!-- Gráfico do mês -->
+  <div class="grafico-header">
+    <h3>Gráfico de Alterações de Saldo (Mensal)</h3>
+  </div>
+   <canvas id="graficoLinhaMes"></canvas>
+</div>
+
+     </div>
+  </div>
+
+
+    <!-- Rodapé -->
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="footer-left">
+          <p>&copy; 2025 Empresa Corporativa. Todos os direitos reservados para Comal Comercio.</p>
+        </div>
+        <div class="footer-right">
+          <span>Relatório gerado automaticamente</span>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+<script type="module" src="script.js"></script>
+</body>
+</html>
